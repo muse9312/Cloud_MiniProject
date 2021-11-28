@@ -7,16 +7,8 @@ public class CoffeeInfo extends Object {
     private String temp;
     private int price;
 
-    public String getTemp() {
-        return temp;
-    }
-
-    public void setTemp(String temp) {
-        this.temp = temp;
-    }
-
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -24,7 +16,7 @@ public class CoffeeInfo extends Object {
     }
 
     public String getSize() {
-        return size;
+        return this.size;
     }
 
     public void setSize(String size) {
@@ -32,24 +24,38 @@ public class CoffeeInfo extends Object {
     }
 
     public String getShot() {
-        return shot;
+        return this.shot;
     }
 
     public void setShot(String shot) {
         this.shot = shot;
     }
 
+    public String getTemp() {
+        return this.temp;
+    }
+
+    public void setTemp(String temp) {
+        this.temp = temp;
+    }
+
     public int getPrice() {
-        return price;
+        return this.price;
     }
 
     public void setPrice(int price) {
         this.price = price;
     }
 
+    @Override
     public String toString() {
-        return "Coffee [name=" + name + ", size=" + size + ", shot=" + shot + ", temp=" + temp + ", price=" + price
-                + "]";
+        return "{" +
+                " name='" + getName() + "'" +
+                ", size='" + getSize() + "'" +
+                ", shot='" + getShot() + "'" +
+                ", temp='" + getTemp() + "'" +
+                ", price='" + getPrice() + "'" +
+                "}";
     }
 
 }

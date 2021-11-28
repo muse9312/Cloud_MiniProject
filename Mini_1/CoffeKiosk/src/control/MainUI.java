@@ -55,8 +55,7 @@ public class MainUI {
         coffee = new CoffeeInfo();
 
         frame = new JFrame();
-        frame.setSize(400, 600);
-        frame.setBounds(100, 100, 800, 750);
+        frame.setSize(800, 1000);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
         frame.setLocationRelativeTo(null);
