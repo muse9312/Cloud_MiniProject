@@ -7,13 +7,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import Banner.Banner_1;
-import Banner.ImagePanel;
 import entitiy.MainUI;
 
 public class MainControl extends JFrame {
 
     public static void main(String[] args) {
-        new Banner_1();
 
         // JFrame frame = new JFrame();
         // frame.setSize(800, 900);
@@ -34,14 +32,13 @@ public class MainControl extends JFrame {
         // EventQueue.invokeLater(new Runnable() {
         // public void run() {
 
-        // try {
-        // Banner_1 b = new Banner_1();
-        // b.page1frame();
-        // } catch (Exception e) {
-        // e.printStackTrace();
-        // }
-        // }
-        // });
+        try {
+            Banner_1 b = new Banner_1();
+            b.page1frame();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

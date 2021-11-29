@@ -41,7 +41,7 @@ public class MainUI {
 
         frame.setTitle("Coffee Kiosk"); // 타이틀
 
-        frame.setSize(800, 1000); // 프레임 크기
+        frame.setSize(800, 900); // 프레임 크기
 
         frame.getContentPane().setLayout(null); // 레이아웃 사용자 설정 가능
         frame.setLocationRelativeTo(null); // 프레임 창 센터 고정
