@@ -1,31 +1,44 @@
 package entitiy;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JRadioButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import java.awt.*;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 
-import java.awt.Font;
-import java.awt.event.ActionListener;
-import java.util.Vector;
-import java.awt.event.ActionEvent;
-import java.awt.Color;
-import javax.swing.ButtonGroup;
+@SuppressWarnings("serial")
+public class MainUI extends JFrame {
 
-public class MainUI {
+    // 변수 선언 (프레임), 그리드 당 가로 160 / 세로 80
+    public static final int FRAME_WIDTH = 1280;
+    public static final int FRAME_HEIGHT = 720;
 
-    Vector<CoffeeInfo> list = new Vector<CoffeeInfo>();
-    CoffeeInfo coffee = null;
-    JLabel lblNewLabel_1;
-    String menu = "";
+    // 변수 선언 (텍스트 출력)
+    String summary;
+    String price;
 
-    public JFrame frame;
-    private final ButtonGroup buttonGroup = new ButtonGroup();
-    private final ButtonGroup buttonGroup_1 = new ButtonGroup();
-    private final ButtonGroup buttonGroup_2 = new ButtonGroup();
+    // 변수 선언 (버튼, 라벨 개수)
+    public final int SIZE_IMAGE = 11;
+    public final int SIZE_BUTTON = 11;
+    public final int SIZE_LABEL = 19;
+    public final int SIZE_CONSTRAINT = (SIZE_BUTTON + SIZE_LABEL);
+
+    public static void main(String[] args) {
+
+        @SuppressWarnings("unused")
+        MainUI frm = new MainUI();
+
+    }
 
     public MainUI() {
 
@@ -33,421 +46,472 @@ public class MainUI {
 
     }
 
-    private void initialize() {
+    public void initialize() {
 
-        coffee = new CoffeeInfo();
+        this.setTitle("Coffee KioskSE");
+        this.setSize(MainUI.FRAME_WIDTH, MainUI.FRAME_HEIGHT);
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        frame = new JFrame();
-
-        frame.setTitle("Coffee Kiosk"); // 타이틀
-
-        frame.setSize(800, 900); // 프레임 크기
-
-        frame.getContentPane().setLayout(null); // 레이아웃 사용자 설정 가능
-        frame.setLocationRelativeTo(null); // 프레임 창 센터 고정
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // JFrame이 정상적으로 종료
-
+        // 변수 선언 (패널)
         JPanel panel = new JPanel();
-        panel.setBackground(new Color(255, 182, 193));
-        panel.setBounds(0, 0, 784, 400);
-        frame.getContentPane().add(panel);
-        panel.setLayout(null);
 
-        // ================================ 메뉴 =============================
+        // 변수 선언 (레이아웃)
+        GridBagLayout layout = new GridBagLayout();
 
-        JButton btnNewButton = new JButton("에스프레소");
-        btnNewButton.addActionListener(new ActionListener() {
+        // 변수 선언(컨스트레인트)
+        GridBagConstraints[] constraint = new GridBagConstraints[SIZE_CONSTRAINT];
 
+        // 변수 선언 (버튼, 라벨, 이미지)
+        JButton[] button = new JButton[SIZE_BUTTON];
+        JLabel[] label = new JLabel[SIZE_LABEL];
+        ImageIcon[] image = new ImageIcon[SIZE_IMAGE];
+
+        // 패널 세팅
+        panel.setBackground(Color.WHITE);
+        panel.setLayout(layout);
+
+        // 변수 초기화
+        for (int i = 0; i < SIZE_CONSTRAINT; i++)
+            constraint[i] = new GridBagConstraints();
+
+        for (int i = 0; i < SIZE_BUTTON; i++)
+            button[i] = new JButton("button" + i);
+
+        for (int i = 0; i < SIZE_LABEL; i++)
+            label[i] = new JLabel("label" + i);
+
+        ///////////////////////////////////////////////////////////////////////////////////////
+        // 상품 버튼
+
+        image[0] = new ImageIcon("./images/MenuImg/americano.png");
+        button[0] = new JButton(image[0]);
+        constraint[0].gridx = 0;
+        constraint[0].gridy = 0;
+        constraint[0].weightx = 2;
+        constraint[0].weighty = 2;
+        constraint[0].fill = GridBagConstraints.BOTH;
+        panel.add(button[0], constraint[0]);
+        button[0].addActionListener(new ActionListener() {
+
+            @Override
             public void actionPerformed(ActionEvent e) {
-
-                coffee.setName("에스프레소");
-                coffee.setPrice(3000);
-                menu = coffee.getName() + " / " + coffee.getPrice();
-                lblNewLabel_1.setText(menu);
-
-            }
-        });
-        btnNewButton.setBounds(50, 37, 100, 70);
-        panel.add(btnNewButton);
-
-        // =============================================================
-
-        JButton btnNewButton_1 = new JButton("아메리카노");
-        btnNewButton_1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                coffee.setName("아메리카노");
-                coffee.setPrice(4000);
-                menu = coffee.getName() + " / " + coffee.getPrice();
-                lblNewLabel_1.setText(menu);
-            }
-        });
-        btnNewButton_1.setBounds(200, 37, 100, 70);
-        panel.add(btnNewButton_1);
-
-        JButton btnNewButton_2 = new JButton("카페라떼");
-        btnNewButton_2.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                coffee.setName("카페라떼");
-                coffee.setPrice(4500);
-                menu = coffee.getName() + " / " + coffee.getPrice();
-                lblNewLabel_1.setText(menu);
-            }
-        });
-        btnNewButton_2.setBounds(350, 37, 100, 70);
-        panel.add(btnNewButton_2);
-
-        // =============================================================
-
-        JButton btnNewButton_3 = new JButton("\uBC14\uB2D0\uB77C\uB77C\uB5BC");
-        btnNewButton_3.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                coffee.setName("바닐라라떼");
-                coffee.setPrice(4600);
-                menu = coffee.getName() + " / " + coffee.getPrice();
-                lblNewLabel_1.setText(menu);
-            }
-        });
-        btnNewButton_3.setBounds(500, 37, 100, 70);
-        panel.add(btnNewButton_3);
-
-        // =============================================================
-
-        JButton btnNewButton_4 = new JButton("\uADF8\uB9B0\uD2F0\uB77C\uB5BC");
-        btnNewButton_4.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                coffee.setName("그린티라떼");
-                coffee.setPrice(4800);
-                menu = coffee.getName() + " / " + coffee.getPrice();
-                lblNewLabel_1.setText(menu);
-            }
-        });
-        btnNewButton_4.setBounds(650, 37, 100, 70);
-        panel.add(btnNewButton_4);
-
-        // =============================================================
-
-        JButton button = new JButton("\uCE74\uD478\uCE58\uB178");
-        button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                coffee.setName("카푸치노");
-                coffee.setPrice(3900);
-                menu = coffee.getName() + " / " + coffee.getPrice();
-                lblNewLabel_1.setText(menu);
-            }
-        });
-        button.setBounds(50, 148, 100, 70);
-        panel.add(button);
-
-        // =============================================================
-
-        JButton button_1 = new JButton("\uB3CC\uCCB4\uB77C\uB5BC");
-        button_1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                coffee.setName("돌체라떼");
-                coffee.setPrice(5100);
-                menu = coffee.getName() + " / " + coffee.getPrice();
-                lblNewLabel_1.setText(menu);
-            }
-        });
-        button_1.setBounds(200, 148, 100, 70);
-        panel.add(button_1);
-
-        // =============================================================
-
-        JButton button_2 = new JButton("\uCE74\uD398\uBAA8\uCE74");
-        button_2.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                coffee.setName("카페모카");
-                coffee.setPrice(4300);
-                menu = coffee.getName() + " / " + coffee.getPrice();
-                lblNewLabel_1.setText(menu);
-            }
-        });
-        button_2.setBounds(350, 148, 100, 70);
-        panel.add(button_2);
-
-        // =============================================================
-
-        JButton button_3 = new JButton("\uD504\uB77C\uD504\uCE58\uB178");
-        button_3.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                coffee.setName("프라프치노");
-                coffee.setPrice(4700);
-                menu = coffee.getName() + " / " + coffee.getPrice();
-                lblNewLabel_1.setText(menu);
-            }
-        });
-        button_3.setBounds(500, 148, 100, 70);
-        panel.add(button_3);
-
-        // =============================================================
-
-        JButton button_4 = new JButton("\uB538\uAE30\uC2A4\uBB34\uB514");
-        button_4.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                coffee.setName("딸기스무디");
-                coffee.setPrice(5000);
-                menu = coffee.getName() + " / " + coffee.getPrice();
-                lblNewLabel_1.setText(menu);
-            }
-        });
-        button_4.setBounds(650, 148, 100, 70);
-        panel.add(button_4);
-
-        // =============================================================
-
-        JButton button_5 = new JButton("\uB9DD\uACE0\uC2A4\uBB34\uB514");
-        button_5.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                coffee.setName("망고스무디");
-                coffee.setPrice(5000);
-                menu = coffee.getName() + " / " + coffee.getPrice();
-                lblNewLabel_1.setText(menu);
-            }
-        });
-        button_5.setBounds(50, 266, 100, 70);
-        panel.add(button_5);
-
-        // =============================================================
-
-        JButton button_6 = new JButton("\uD56B\uCD08\uCF54");
-        button_6.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                coffee.setName("핫초코");
-                coffee.setPrice(3000);
-                menu = coffee.getName() + " / " + coffee.getPrice();
-                lblNewLabel_1.setText(menu);
-            }
-        });
-        button_6.setBounds(200, 266, 100, 70);
-        panel.add(button_6);
-
-        // =============================================================
-
-        JButton button_7 = new JButton("\uBE14\uB799\uD2F0");
-        button_7.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                coffee.setName("블랙티");
-                coffee.setPrice(4000);
-                menu = coffee.getName() + " / " + coffee.getPrice();
-                lblNewLabel_1.setText(menu);
-            }
-        });
-        button_7.setBounds(350, 266, 100, 70);
-        panel.add(button_7);
-
-        // =============================================================
-
-        JButton button_8 = new JButton("\uBC84\uBE14\uD2F0");
-        button_8.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                coffee.setName("버블티");
-                coffee.setPrice(4000);
-                menu = coffee.getName() + " / " + coffee.getPrice();
-                lblNewLabel_1.setText(menu);
-            }
-        });
-        button_8.setBounds(500, 266, 100, 70);
-        panel.add(button_8);
-
-        // =============================================================
-
-        JButton button_9 = new JButton("\uADF8\uB9B0\uD2F0");
-        button_9.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                coffee.setName("그린티");
-                coffee.setPrice(4000);
-                menu = coffee.getName() + " / " + coffee.getPrice();
-                lblNewLabel_1.setText(menu);
+                label[11].setText(summary = "아메리카노");
+                label[12].setText("2000");
             }
         });
 
-        button_9.setBounds(650, 266, 100, 70);
-        panel.add(button_9);
+        image[1] = new ImageIcon("./images/MenuImg/espresso.png");
+        button[1] = new JButton(image[1]);
+        constraint[1].gridx = 1;
+        constraint[1].gridy = 0;
+        constraint[1].weightx = 2;
+        constraint[1].weighty = 2;
+        constraint[1].fill = GridBagConstraints.BOTH;
+        panel.add(button[1], constraint[1]);
+        button[1].addActionListener(new ActionListener() {
 
-        // 버튼
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                label[11].setText("에스프레소");
+                label[12].setText("2500 원");
+            }
+        });
 
-        // =========================== 옵션 선택 ===========================
+        image[2] = new ImageIcon("./images/MenuImg/latte.png");
+        button[2] = new JButton(image[2]);
+        constraint[2].gridx = 2;
+        constraint[2].gridy = 0;
+        constraint[2].weightx = 2;
+        constraint[2].weighty = 2;
+        constraint[2].fill = GridBagConstraints.BOTH;
+        panel.add(button[2], constraint[2]);
+        button[2].addActionListener(new ActionListener() {
 
-        JPanel panel_1 = new JPanel();
-        panel_1.setBounds(0, 396, 784, 115);
-        frame.getContentPane().add(panel_1);
-        panel_1.setLayout(null);
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                label[11].setText("카페라떼");
+                label[12].setText("3000 원");
+            }
+        });
 
-        JRadioButton rdbtnNewRadioButton = new JRadioButton("  ICE");
-        buttonGroup.add(rdbtnNewRadioButton);
-        rdbtnNewRadioButton.addActionListener(new ActionListener() {
+        image[3] = new ImageIcon("./images/MenuImg/mocha.png");
+        button[3] = new JButton(image[3]);
+        constraint[6].gridx = 0;
+        constraint[6].gridy = 2;
+        constraint[6].weightx = 2;
+        constraint[6].weighty = 5;
+        constraint[6].fill = GridBagConstraints.BOTH;
+        panel.add(button[3], constraint[6]);
+        button[3].addActionListener(new ActionListener() {
 
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                label[11].setText("카페모카");
+                label[12].setText("3500 원");
+            }
+        });
+
+        image[4] = new ImageIcon("./images/MenuImg/caramel.png");
+        button[4] = new JButton(image[4]);
+        constraint[7].gridx = 1;
+        constraint[7].gridy = 2;
+        constraint[7].weightx = 2;
+        constraint[7].weighty = 5;
+        constraint[7].fill = GridBagConstraints.BOTH;
+        panel.add(button[4], constraint[7]);
+        button[4].addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                label[11].setText("카라멜 마끼아또");
+                label[12].setText("4000 원");
+            }
+        });
+
+        image[5] = new ImageIcon("./images/MenuImg/mixed.png");
+        button[5] = new JButton(image[5]);
+        constraint[8].gridx = 2;
+        constraint[8].gridy = 2;
+        constraint[8].weightx = 2;
+        constraint[8].weighty = 5;
+        constraint[8].fill = GridBagConstraints.BOTH;
+        panel.add(button[5], constraint[8]);
+        button[5].addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                label[11].setText("옛날커피");
+                label[12].setText("2000 원");
+            }
+        });
+
+        image[6] = new ImageIcon(
+                "./images/MenuImg/strawberrysmoothy.png");
+        button[6] = new JButton(image[6]);
+        constraint[12].gridx = 0;
+        constraint[12].gridy = 4;
+        constraint[12].weightx = 2;
+        constraint[12].weighty = 5;
+        constraint[12].fill = GridBagConstraints.BOTH;
+        panel.add(button[6], constraint[12]);
+        button[6].addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                label[11].setText("딸기 스무디");
+                label[12].setText("4000 원");
+            }
+        });
+
+        image[7] = new ImageIcon("./images/MenuImg/vanilla.png");
+        button[7] = new JButton(image[7]);
+        constraint[13].gridx = 1;
+        constraint[13].gridy = 4;
+        constraint[13].weightx = 2;
+        constraint[13].weighty = 5;
+        constraint[13].fill = GridBagConstraints.BOTH;
+        panel.add(button[7], constraint[13]);
+        button[7].addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                label[11].setText("바닐라 라떼");
+                label[12].setText("4000 원");
+            }
+        });
+
+        image[8] = new ImageIcon("./images/MenuImg/cold.png");
+        button[8] = new JButton(image[8]);
+        constraint[14].gridx = 2;
+        constraint[14].gridy = 4;
+        constraint[14].weightx = 2;
+        constraint[14].weighty = 5;
+        constraint[14].fill = GridBagConstraints.BOTH;
+        panel.add(button[8], constraint[14]);
+        button[8].addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                label[11].setText("콜드 브루");
+                label[12].setText("2500 원");
+            }
+        });
+
+        ///////////////////////////////////////////////////////////////////////////////////////
+        // 상품 라벨
+        constraint[3].gridx = 0;
+        constraint[3].gridy = 1;
+        constraint[3].weightx = 2;
+        constraint[3].weighty = 1;
+        constraint[3].fill = GridBagConstraints.HORIZONTAL;
+        label[0] = new JLabel("아메리카노");
+        label[0].setHorizontalAlignment(JLabel.CENTER);
+        panel.add(label[0], constraint[3]);
+
+        constraint[4].gridx = 1;
+        constraint[4].gridy = 1;
+        constraint[4].weightx = 2;
+        constraint[4].weighty = 1;
+        constraint[4].fill = GridBagConstraints.HORIZONTAL;
+        label[1] = new JLabel("에스프레소");
+        label[1].setHorizontalAlignment(JLabel.CENTER);
+        panel.add(label[1], constraint[4]);
+
+        constraint[5].gridx = 2;
+        constraint[5].gridy = 1;
+        constraint[5].weightx = 2;
+        constraint[5].weighty = 1;
+        constraint[5].fill = GridBagConstraints.HORIZONTAL;
+        label[2] = new JLabel("카페라떼");
+        label[2].setHorizontalAlignment(JLabel.CENTER);
+        panel.add(label[2], constraint[5]);
+
+        constraint[9].gridx = 0;
+        constraint[9].gridy = 3;
+        constraint[9].weightx = 2;
+        constraint[9].weighty = 1;
+        constraint[9].fill = GridBagConstraints.HORIZONTAL;
+        label[3] = new JLabel("카페모까");
+        label[3].setHorizontalAlignment(JLabel.CENTER);
+        panel.add(label[3], constraint[9]);
+
+        constraint[10].gridx = 1;
+        constraint[10].gridy = 3;
+        constraint[10].weightx = 2;
+        constraint[10].weighty = 1;
+        constraint[10].fill = GridBagConstraints.HORIZONTAL;
+        label[4] = new JLabel("카라멜 마끼아또");
+        label[4].setHorizontalAlignment(JLabel.CENTER);
+        panel.add(label[4], constraint[10]);
+
+        constraint[11].gridx = 2;
+        constraint[11].gridy = 3;
+        constraint[11].weightx = 2;
+        constraint[11].weighty = 1;
+        constraint[11].fill = GridBagConstraints.HORIZONTAL;
+        label[5] = new JLabel("옛날커피");
+        label[5].setHorizontalAlignment(JLabel.CENTER);
+        panel.add(label[5], constraint[11]);
+
+        constraint[15].gridx = 0;
+        constraint[15].gridy = 5;
+        constraint[15].weightx = 2;
+        constraint[15].weighty = 1;
+        constraint[15].fill = GridBagConstraints.HORIZONTAL;
+        label[6] = new JLabel("딸기 스무디");
+        label[6].setHorizontalAlignment(JLabel.CENTER);
+        panel.add(label[6], constraint[15]);
+
+        constraint[16].gridx = 1;
+        constraint[16].gridy = 5;
+        constraint[16].weightx = 2;
+        constraint[16].weighty = 1;
+        constraint[16].fill = GridBagConstraints.HORIZONTAL;
+        label[7] = new JLabel("바닐라라떼");
+        label[7].setHorizontalAlignment(JLabel.CENTER);
+        panel.add(label[7], constraint[16]);
+
+        constraint[17].gridx = 2;
+        constraint[17].gridy = 5;
+        constraint[17].weightx = 2;
+        constraint[17].weighty = 1;
+        constraint[17].fill = GridBagConstraints.HORIZONTAL;
+        label[8] = new JLabel("콜드 브루");
+        label[8].setHorizontalAlignment(JLabel.CENTER);
+        panel.add(label[8], constraint[17]);
+
+        ///////////////////////////////////////////////////////////////////////////////////////
+        // 제작자 로고
+        image[9] = new ImageIcon("./images/MenuImg/team.png");
+        label[9] = new JLabel(image[9]);
+        label[9].setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        constraint[18].gridx = 3;
+        constraint[18].gridy = 0;
+        constraint[18].weightx = 1;
+        constraint[18].weighty = 2;
+        constraint[18].fill = GridBagConstraints.BOTH;
+        panel.add(label[9], constraint[18]);
+
+        // 가게 로고
+        image[10] = new ImageIcon("./images/MenuImg/gglogo.png");
+        label[10] = new JLabel(image[10]);
+        label[10].setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        constraint[18].gridx = 4;
+        constraint[18].gridy = 0;
+        constraint[18].weightx = 1;
+        constraint[18].weighty = 2;
+        constraint[18].fill = GridBagConstraints.BOTH;
+        panel.add(label[10], constraint[29]);
+
+        ///////////////////////////////////////////////////////////////////////////////////////
+        // 샷 추가
+        JRadioButton shot1 = new JRadioButton("샷 1회 추가");
+        shot1.setBounds(1, 3, 160, 80);
+        shot1.setBackground(Color.WHITE);
+        shot1.addActionListener(new ActionListener() {
+
+            @Override
             public void actionPerformed(ActionEvent e) {
 
-                coffee.setTemp("ICE");
-                menu = coffee.getName() + " / " + coffee.getTemp() + " / " + coffee.getPrice();
-                lblNewLabel_1.setText(menu);
+                label[11].setText("샷 1회 추가");
+                label[12].setText(price += "500");
 
             }
         });
-        rdbtnNewRadioButton.setBounds(145, 42, 60, 26);
-        panel_1.add(rdbtnNewRadioButton);
+        JRadioButton shot2 = new JRadioButton("샷 2회 추가");
+        shot2.setBounds(7, 7, 160, 80);
+        shot2.setBackground(Color.WHITE);
+        JRadioButton shot0 = new JRadioButton("샷 추가 없음");
+        shot0.setBounds(7, 10, 160, 80);
+        shot0.setBackground(Color.WHITE);
 
-        JRadioButton rdbtnHot = new JRadioButton("  HOT");
-        buttonGroup.add(rdbtnHot);
-        rdbtnHot.addActionListener(new ActionListener() {
+        ButtonGroup shotButton = new ButtonGroup();
+        shotButton.add(shot1);
+        shotButton.add(shot2);
+        shotButton.add(shot0);
 
+        // 사이즈 선택
+        JRadioButton size1 = new JRadioButton("레귤러");
+        shot1.setBounds(7, 3, 160, 80);
+        shot1.setBackground(Color.WHITE);
+        JRadioButton size2 = new JRadioButton("라지");
+        shot2.setBounds(7, 3, 160, 80);
+        shot2.setBackground(Color.WHITE);
+        JRadioButton size0 = new JRadioButton("스몰");
+        shot0.setBounds(7, 3, 160, 80);
+        shot0.setBackground(Color.WHITE);
+
+        ButtonGroup sizeButton = new ButtonGroup();
+        sizeButton.add(size1);
+        sizeButton.add(size2);
+        sizeButton.add(size0);
+
+        // 온도 선택
+        JRadioButton temp1 = new JRadioButton("따뜻하게");
+        JRadioButton temp2 = new JRadioButton("시원하게");
+
+        ButtonGroup tempButton = new ButtonGroup();
+        tempButton.add(temp1);
+        tempButton.add(temp2);
+
+        ///////////////////////////////////////////////////////////////////////////////////////
+        // 사이드 라벨
+        label[13].setText("");
+        constraint[19].gridx = 3;
+        constraint[19].gridy = 1;
+        constraint[19].weightx = 1;
+        constraint[19].weighty = 1;
+        constraint[19].fill = GridBagConstraints.BOTH;
+        panel.add(label[13], constraint[19]);
+
+        label[14].add(size1);
+        label[14].add(size2);
+        label[14].add(size0);
+        constraint[20].gridx = 3;
+        constraint[20].gridy = 2;
+        constraint[20].weightx = 1;
+        constraint[20].weighty = 1;
+        constraint[20].fill = GridBagConstraints.BOTH;
+        panel.add(label[14], constraint[20]);
+
+        label[15].setText("");
+        constraint[21].gridx = 3;
+        constraint[21].gridy = 3;
+        constraint[21].weightx = 1;
+        constraint[21].weighty = 1;
+        constraint[21].fill = GridBagConstraints.BOTH;
+        panel.add(label[15], constraint[21]);
+
+        label[16].setText("");
+        constraint[22].gridx = 4;
+        constraint[22].gridy = 1;
+        constraint[22].weightx = 1;
+        constraint[22].weighty = 1;
+        constraint[22].fill = GridBagConstraints.BOTH;
+        panel.add(label[16], constraint[22]);
+
+        label[17].add(shot1);
+        label[17].add(shot2);
+        label[17].add(shot0);
+        constraint[23].gridx = 4;
+        constraint[23].gridy = 2;
+        constraint[23].weightx = 1;
+        constraint[23].weighty = 1;
+        constraint[23].fill = GridBagConstraints.BOTH;
+        panel.add(label[17], constraint[23]);
+
+        label[18].setText("");
+        constraint[24].gridx = 4;
+        constraint[24].gridy = 3;
+        constraint[24].weightx = 1;
+        constraint[24].weighty = 1;
+        constraint[24].fill = GridBagConstraints.BOTH;
+        panel.add(label[18], constraint[24]);
+
+        ///////////////////////////////////////////////////////////////////////////////////////
+        // 커피 요약
+        label[11] = new JLabel();
+        label[11].setHorizontalAlignment(JLabel.CENTER);
+        constraint[25].gridx = 3;
+        constraint[25].gridy = 4;
+        constraint[25].weightx = 2;
+        constraint[25].weighty = 1;
+        constraint[25].fill = GridBagConstraints.HORIZONTAL;
+        panel.add(label[11], constraint[25]);
+
+        // 가격 요약
+        label[12] = new JLabel();
+        label[12].setHorizontalAlignment(JLabel.CENTER);
+        constraint[26].gridx = 4;
+        constraint[26].gridy = 4;
+        constraint[26].weightx = 2;
+        constraint[26].weighty = 1;
+        constraint[26].fill = GridBagConstraints.HORIZONTAL;
+        panel.add(label[12], constraint[26]);
+
+        ///////////////////////////////////////////////////////////////////////////////////////
+        // 결제 버튼
+        button[9].setText("결제하기");
+        constraint[27].gridx = 3;
+        constraint[27].gridy = 5;
+        constraint[27].weightx = 1;
+        constraint[27].weighty = 2;
+        constraint[27].fill = GridBagConstraints.BOTH;
+        panel.add(button[9], constraint[27]);
+        button[9].addActionListener(new ActionListener() {
+
+            @Override
             public void actionPerformed(ActionEvent e) {
-                coffee.setTemp("HOT");
-                menu = coffee.getName() + " / " + coffee.getTemp() + " / " + coffee.getPrice();
-                lblNewLabel_1.setText(menu);
-
+                JOptionPane.showMessageDialog(null, "결제가 승인됐습니다." + "\\n" + "잠시만 기다려주세요.");
+                label[11].setText("");
+                label[12].setText("");
             }
         });
-        rdbtnHot.setBounds(209, 42, 121, 26);
-        panel_1.add(rdbtnHot);
 
-        JRadioButton rdbtnSmall = new JRadioButton("  SMALL");
-        buttonGroup_1.add(rdbtnSmall);
-        rdbtnSmall.addActionListener(new ActionListener() {
+        // 취소 버튼
+        button[10].setText("취소하기");
+        constraint[28].gridx = 4;
+        constraint[28].gridy = 5;
+        constraint[28].weightx = 1;
+        constraint[28].weighty = 2;
+        constraint[28].fill = GridBagConstraints.BOTH;
+        panel.add(button[10], constraint[28]);
+        button[10].addActionListener(new ActionListener() {
 
+            @Override
             public void actionPerformed(ActionEvent e) {
-                coffee.setSize("SMALL");
-                menu = coffee.getName() + " / " + coffee.getSize() + " / " + coffee.getTemp() + " / "
-                        + coffee.getPrice();
-                lblNewLabel_1.setText(menu);
+                JOptionPane.showMessageDialog(null, "장바구니를 비웠습니다.");
+                label[11].setText("");
+                label[12].setText("");
             }
         });
-        rdbtnSmall.setBounds(469, 42, 80, 26);
-        panel_1.add(rdbtnSmall);
 
-        JRadioButton rdbtnTall = new JRadioButton("  TALL");
-        buttonGroup_1.add(rdbtnTall);
-        rdbtnTall.addActionListener(new ActionListener() {
-
-            public void actionPerformed(ActionEvent e) {
-                coffee.setSize("TALL");
-                coffee.setPrice(coffee.getPrice() + 500);
-                menu = coffee.getName() + " / " + coffee.getSize() + " / " + coffee.getTemp() + " / "
-                        + coffee.getPrice();
-                lblNewLabel_1.setText(menu);
-            }
-        });
-        rdbtnTall.setBounds(561, 42, 80, 26);
-        panel_1.add(rdbtnTall);
-
-        JRadioButton rdbtnLarge = new JRadioButton("  LARGE");
-        buttonGroup_1.add(rdbtnLarge);
-        rdbtnLarge.addActionListener(new ActionListener() {
-
-            public void actionPerformed(ActionEvent e) {
-                coffee.setSize("LARGE");
-                coffee.setPrice(coffee.getPrice() + 1000);
-                menu = coffee.getName() + " / " + coffee.getSize() + " / " + coffee.getTemp() + " / "
-                        + coffee.getPrice();
-                lblNewLabel_1.setText(menu);
-            }
-        });
-        rdbtnLarge.setBounds(644, 42, 121, 26);
-        panel_1.add(rdbtnLarge);
-
-        JLabel lblNewLabel = new JLabel("HOT / ICE");
-        lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 15));
-        lblNewLabel.setBounds(59, 45, 99, 18);
-        panel_1.add(lblNewLabel);
-
-        JLabel label = new JLabel("\uC74C\uB8CC \uC0AC\uC774\uC988");
-        label.setFont(new Font("Dialog", Font.BOLD, 15));
-        label.setBounds(373, 45, 99, 18);
-        panel_1.add(label);
-
-        JLabel label_1 = new JLabel("\uC0F7\uCD94\uAC00");
-        label_1.setFont(new Font("Dialog", Font.BOLD, 15));
-        label_1.setBounds(59, 86, 99, 18);
-        panel_1.add(label_1);
-
-        JRadioButton rdbtnYes = new JRadioButton("  YES");
-        buttonGroup_2.add(rdbtnYes);
-        rdbtnYes.addActionListener(new ActionListener() {
-
-            public void actionPerformed(ActionEvent e) {
-                coffee.setShot("샷추가");
-                coffee.setPrice(coffee.getPrice() + 500);
-                menu = coffee.getName() + " / " + coffee.getSize() + " / " + coffee.getShot() + " / " + coffee.getTemp()
-                        + " / " + coffee.getPrice() + " 선택하였습니다.";
-                lblNewLabel_1.setText(menu);
-            }
-        });
-        rdbtnYes.setBounds(145, 83, 60, 26);
-        panel_1.add(rdbtnYes);
-
-        JRadioButton rdbtnNo = new JRadioButton("  NO");
-        buttonGroup_2.add(rdbtnNo);
-        rdbtnNo.addActionListener(new ActionListener() {
-
-            public void actionPerformed(ActionEvent e) {
-                coffee.setShot("NO샷");
-                menu = coffee.getName() + " / " + coffee.getSize() + " / " + coffee.getShot() + " / " + coffee.getTemp()
-                        + " / " + coffee.getPrice() + " 선택하였습니다.";
-                lblNewLabel_1.setText(menu);
-            }
-        });
-        rdbtnNo.setBounds(209, 83, 121, 26);
-        panel_1.add(rdbtnNo);
-        // 라디오버튼
-
-        JPanel panel_2 = new JPanel();
-        panel_2.setBounds(0, 512, 784, 217);
-        frame.getContentPane().add(panel_2);
-        panel_2.setLayout(null);
-
-        lblNewLabel_1 = new JLabel();
-        lblNewLabel_1.setFont(new Font("굴림", Font.BOLD, 20));
-        lblNewLabel_1.setText("\uCEE4\uD53C");
-
-        lblNewLabel_1.setBounds(81, 40, 618, 26);
-        panel_2.add(lblNewLabel_1);
-        // 스트링에 문자열을 넣고 액션이 나올마다 스트링에 값을 넣어주고 마지막으로 값을 넣어준다.
-        lblNewLabel_1.setText(menu);
-
-        JButton btnNewButton_5 = new JButton("\uACB0\uC81C");// 결제 누르면 서버로 입력
-        btnNewButton_5.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-
-                System.out.println(coffee);
-                buttonGroup.clearSelection();
-                buttonGroup_1.clearSelection();
-                buttonGroup_2.clearSelection();
-                lblNewLabel_1.setText("");
-                JOptionPane.showMessageDialog(null, "결제 되었습니다");
-
-            }
-        });
-        btnNewButton_5.setBounds(598, 121, 123, 38);
-        panel_2.add(btnNewButton_5);
-
-        JButton button_10 = new JButton("\uC120\uD0DD\uCDE8\uC18C");
-        button_10.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-
-                coffee.setName(null);
-                coffee.setShot(null);
-                coffee.setSize(null);
-                coffee.setTemp(null);
-                coffee.setPrice(0);
-                lblNewLabel_1.setText("");
-                // 버튼 초기화
-                buttonGroup.clearSelection();
-                buttonGroup_1.clearSelection();
-                buttonGroup_2.clearSelection();
-                System.out.println(coffee);
-                JOptionPane.showMessageDialog(null, "선택취소되었습니다.");
-
-            }
-        });
-        button_10.setBounds(431, 121, 123, 38);
-        panel_2.add(button_10);
-
+        ///////////////////////////////////////////////////////////////////////////////////////
+        // 프레임 설정
+        this.setContentPane(panel);
+        this.setVisible(true);
     }
 
-    public void paint(Graphics g) {
-
-    }
-
-}
+};
