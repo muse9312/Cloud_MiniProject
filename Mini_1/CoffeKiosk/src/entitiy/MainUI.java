@@ -20,7 +20,6 @@ import javax.swing.JRadioButton;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-@SuppressWarnings("serial")
 public class MainUI extends JFrame {
 
     // 변수 (계산 관련)
@@ -40,13 +39,6 @@ public class MainUI extends JFrame {
     public final int SIZE_BUTTON = 11;
     public final int SIZE_LABEL = 19;
     public final int SIZE_CONSTRAINT = (SIZE_BUTTON + SIZE_LABEL);
-
-    public static void main(String[] args) {
-
-        @SuppressWarnings("unused")
-        MainUI frm = new MainUI();
-
-    }
 
     public MainUI() {
 

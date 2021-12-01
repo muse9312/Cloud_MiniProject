@@ -1,16 +1,19 @@
 package Banner;
 
 import java.awt.Canvas;
-import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import java.awt.*;
 
-public class BannerPage extends JFrame implements Runnable {
+import entitiy.MainUI;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class BannerPage extends JFrame {
 
     // JButton[] ImgButton;
     // ImageIcon[] Images;
@@ -21,27 +24,36 @@ public class BannerPage extends JFrame implements Runnable {
     Toolkit tk;
     boolean repeat = true;
 
-    // ImageIcon ic1 = new ImageIcon("./images/poster_1.jpg");
-    // ImageIcon ic2 = new ImageIcon("./images/poster_2.jpg");
-    // Image img = ic1.getImage();
-
     public BannerPage() {
         tk = Toolkit.getDefaultToolkit();
-        initDuke();
+        // initDuke();
+        JButton btn = new JButton();
+        btn = new JButton(new ImageIcon("./images/poster_3.jpg"));
 
-        this.add(can = new Canvas() {
+        // 윈도우 실행
+
+        btn.addActionListener((ActionListener) new ActionListener() {
 
             @Override
-            public void paint(Graphics g) {
-                g.drawImage(buffer, 0, 0, this);
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new MainUI();
             }
-
-            @Override
-            public void update(Graphics g) {
-                paint(g);
-            }
-
         });
+
+        // this.add(can = new Canvas() {
+
+        // @Override
+        // public void paint(Graphics g) {
+        // g.drawImage(buffer, 0, 0, this);
+        // }
+
+        // @Override
+        // public void update(Graphics g) {
+        // paint(g);
+        // }
+
+        // });
 
         setTitle("배너"); // 타이틀
         setSize(800, 900); // 프레임 크기
@@ -49,47 +61,64 @@ public class BannerPage extends JFrame implements Runnable {
         setLocationRelativeTo(null);// 창이 가운데 나오게
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // getContentPane().add(panel, BorderLayout.CENTER);
-
+        add(btn);
         setVisible(true);
-        makeThread();
+        // makeThread();
+
     }
 
-    public void makeThread() {
-        new Thread(this).start();
-    }
+    // public void Button() {
+    // JButton btn = new JButton("화면을 클릭해주세요");
 
-    // 듀크 초기화
-    public void initDuke() {
+    // // 윈도우 실행
 
-        duke = new Image[3];
+    // btn.addActionListener((ActionListener) new ActionListener() {
 
-        for (int i = 0; i < duke.length; i++) {
-            duke[i] = tk.getImage(String.format("./images/poster_%d.jpg", i + 1));
-        }
-    }
+    // @Override
+    // public void actionPerformed(ActionEvent e) {
+    // dispose();
+    // new MainUI();
+    // }
+    // });
 
-    public void bufferPaint(int n) {
-        buffer = createImage(can.getWidth(), can.getHeight());
-        Graphics buffer_g = buffer.getGraphics();
+    // }
 
-        buffer_g.drawImage(duke[n], 50, 0, this);
+    // public void makeThread() {
+    // new Thread(this).start();
+    // }
 
-        can.repaint();
-    }
+    // // 듀크 초기화
+    // public void initDuke() {
 
-    @Override
-    public void run() {
-        while (true) {
-            for (int i = 0; i < duke.length; i++) {
-                if (!repeat)
-                    return;
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException ex) {
-                }
-                bufferPaint(i);
-            }
-        }
-    }
+    // duke = new Image[3];
+
+    // for (int i = 0; i < duke.length; i++) {
+    // duke[i] = tk.getImage(String.format("./images/poster_%d.jpg", i + 1));
+
+    // }
+    // }
+
+    // public void bufferPaint(int n) {
+    // buffer = createImage(can.getWidth(), can.getHeight());
+    // Graphics buffer_g = buffer.getGraphics();
+
+    // buffer_g.drawImage(duke[n], 50, 0, this);
+
+    // can.repaint();
+    // }
+
+    // @Override
+    // public void run() {
+    // while (true) {
+    // for (int i = 0; i < duke.length; i++) {
+    // if (!repeat)
+    // return;
+    // try {
+    // Thread.sleep(2000);
+    // } catch (InterruptedException ex) {
+    // }
+    // bufferPaint(i);
+    // }
+    // }
+    // }
 }
