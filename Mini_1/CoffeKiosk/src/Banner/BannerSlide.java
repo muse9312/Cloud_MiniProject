@@ -50,8 +50,6 @@ public class BannerSlide extends JFrame implements Runnable {
         setLocationRelativeTo(null);// 창이 가운데 나오게
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // getContentPane().add(panel, BorderLayout.CENTER);
-
         setVisible(true);
         makeThread();
     }
@@ -86,7 +84,7 @@ public class BannerSlide extends JFrame implements Runnable {
                 if (!repeat)
                     return;
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(500);
                 } catch (InterruptedException ex) {
                 }
                 bufferPaint(i);

@@ -41,20 +41,6 @@ public class BannerPage extends JFrame {
             }
         });
 
-        // this.add(can = new Canvas() {
-
-        // @Override
-        // public void paint(Graphics g) {
-        // g.drawImage(buffer, 0, 0, this);
-        // }
-
-        // @Override
-        // public void update(Graphics g) {
-        // paint(g);
-        // }
-
-        // });
-
         setTitle("배너"); // 타이틀
         setSize(800, 900); // 프레임 크기
 
@@ -63,62 +49,7 @@ public class BannerPage extends JFrame {
 
         add(btn);
         setVisible(true);
-        // makeThread();
 
     }
 
-    // public void Button() {
-    // JButton btn = new JButton("화면을 클릭해주세요");
-
-    // // 윈도우 실행
-
-    // btn.addActionListener((ActionListener) new ActionListener() {
-
-    // @Override
-    // public void actionPerformed(ActionEvent e) {
-    // dispose();
-    // new MainUI();
-    // }
-    // });
-
-    // }
-
-    // public void makeThread() {
-    // new Thread(this).start();
-    // }
-
-    // // 듀크 초기화
-    // public void initDuke() {
-
-    // duke = new Image[3];
-
-    // for (int i = 0; i < duke.length; i++) {
-    // duke[i] = tk.getImage(String.format("./images/poster_%d.jpg", i + 1));
-
-    // }
-    // }
-
-    // public void bufferPaint(int n) {
-    // buffer = createImage(can.getWidth(), can.getHeight());
-    // Graphics buffer_g = buffer.getGraphics();
-
-    // buffer_g.drawImage(duke[n], 50, 0, this);
-
-    // can.repaint();
-    // }
-
-    // @Override
-    // public void run() {
-    // while (true) {
-    // for (int i = 0; i < duke.length; i++) {
-    // if (!repeat)
-    // return;
-    // try {
-    // Thread.sleep(2000);
-    // } catch (InterruptedException ex) {
-    // }
-    // bufferPaint(i);
-    // }
-    // }
-    // }
 }
