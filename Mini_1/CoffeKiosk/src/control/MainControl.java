@@ -5,12 +5,11 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 
 import Banner.BannerPage;
+import entitiy.MainUI;
 
 public class MainControl extends JFrame {
 
     public static void main(String[] args) {
-
-        new MainUI();
 
         // try {
         // Banner_1 b = new Banner_1();
