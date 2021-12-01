@@ -1,5 +1,6 @@
 package entitiy;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -7,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,17 +17,23 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
 
 @SuppressWarnings("serial")
 public class MainUI extends JFrame {
 
+    // 변수 (계산 관련)
+    CoffeeInfo coffee = null;
+    int sumPrice = 0;
+    String selectedProduct = "";
+    // String selectedOption0 = "";
+    String selectedOption1 = "";
+    String selectedOption2 = "";
+
     // 변수 선언 (프레임), 그리드 당 가로 160 / 세로 80
     public static final int FRAME_WIDTH = 1280;
     public static final int FRAME_HEIGHT = 720;
-
-    // 변수 선언 (텍스트 출력)
-    String summary;
-    String price;
 
     // 변수 선언 (버튼, 라벨 개수)
     public final int SIZE_IMAGE = 11;
@@ -47,6 +55,8 @@ public class MainUI extends JFrame {
     }
 
     public void initialize() {
+
+        coffee = new CoffeeInfo();
 
         this.setTitle("Coffee KioskSE");
         this.setSize(MainUI.FRAME_WIDTH, MainUI.FRAME_HEIGHT);
@@ -97,8 +107,12 @@ public class MainUI extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                label[11].setText(summary = "아메리카노");
-                label[12].setText("2000");
+                coffee.setName("아메리카노");
+                coffee.setPrice(2000);
+                selectedProduct = coffee.getName();
+                sumPrice = coffee.getPrice();
+                label[11].setText(selectedProduct);
+                label[12].setText(String.valueOf(sumPrice) + "원");
             }
         });
 
@@ -114,8 +128,12 @@ public class MainUI extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                label[11].setText("에스프레소");
-                label[12].setText("2500 원");
+                coffee.setName("에스프레소");
+                coffee.setPrice(2500);
+                selectedProduct = coffee.getName();
+                sumPrice = coffee.getPrice();
+                label[11].setText(selectedProduct);
+                label[12].setText(String.valueOf(sumPrice) + "원");
             }
         });
 
@@ -131,8 +149,12 @@ public class MainUI extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                label[11].setText("카페라떼");
-                label[12].setText("3000 원");
+                coffee.setName("카페라떼");
+                coffee.setPrice(3000);
+                selectedProduct = coffee.getName();
+                sumPrice = coffee.getPrice();
+                label[11].setText(selectedProduct);
+                label[12].setText(String.valueOf(sumPrice) + "원");
             }
         });
 
@@ -148,8 +170,12 @@ public class MainUI extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                label[11].setText("카페모카");
-                label[12].setText("3500 원");
+                coffee.setName("카페모카");
+                coffee.setPrice(3000);
+                selectedProduct = coffee.getName();
+                sumPrice = coffee.getPrice();
+                label[11].setText(selectedProduct);
+                label[12].setText(String.valueOf(sumPrice) + "원");
             }
         });
 
@@ -165,8 +191,12 @@ public class MainUI extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                label[11].setText("카라멜 마끼아또");
-                label[12].setText("4000 원");
+                coffee.setName("카라멜 마끼아또");
+                coffee.setPrice(4000);
+                selectedProduct = coffee.getName();
+                sumPrice = coffee.getPrice();
+                label[11].setText(selectedProduct);
+                label[12].setText(String.valueOf(sumPrice) + "원");
             }
         });
 
@@ -182,8 +212,12 @@ public class MainUI extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                label[11].setText("옛날커피");
-                label[12].setText("2000 원");
+                coffee.setName("옛날커피");
+                coffee.setPrice(2000);
+                selectedProduct = coffee.getName();
+                sumPrice = coffee.getPrice();
+                label[11].setText(selectedProduct);
+                label[12].setText(String.valueOf(sumPrice) + "원");
             }
         });
 
@@ -200,8 +234,12 @@ public class MainUI extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                label[11].setText("딸기 스무디");
-                label[12].setText("4000 원");
+                coffee.setName("딸기 스무디");
+                coffee.setPrice(3500);
+                selectedProduct = coffee.getName();
+                sumPrice = coffee.getPrice();
+                label[11].setText(selectedProduct);
+                label[12].setText(String.valueOf(sumPrice) + "원");
             }
         });
 
@@ -217,8 +255,12 @@ public class MainUI extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                label[11].setText("바닐라 라떼");
-                label[12].setText("4000 원");
+                coffee.setName("바닐라라떼");
+                coffee.setPrice(4000);
+                selectedProduct = coffee.getName();
+                sumPrice = coffee.getPrice();
+                label[11].setText(selectedProduct);
+                label[12].setText(String.valueOf(sumPrice) + "원");
             }
         });
 
@@ -234,8 +276,12 @@ public class MainUI extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                label[11].setText("콜드 브루");
-                label[12].setText("2500 원");
+                coffee.setName("콜드 브루");
+                coffee.setPrice(2500);
+                selectedProduct = coffee.getName();
+                sumPrice = coffee.getPrice();
+                label[11].setText(selectedProduct);
+                label[12].setText(String.valueOf(sumPrice) + "원");
             }
         });
 
@@ -273,7 +319,7 @@ public class MainUI extends JFrame {
         constraint[9].weightx = 2;
         constraint[9].weighty = 1;
         constraint[9].fill = GridBagConstraints.HORIZONTAL;
-        label[3] = new JLabel("카페모까");
+        label[3] = new JLabel("카페모카");
         label[3].setHorizontalAlignment(JLabel.CENTER);
         panel.add(label[3], constraint[9]);
 
@@ -346,55 +392,202 @@ public class MainUI extends JFrame {
         panel.add(label[10], constraint[29]);
 
         ///////////////////////////////////////////////////////////////////////////////////////
-        // 샷 추가
-        JRadioButton shot1 = new JRadioButton("샷 1회 추가");
-        shot1.setBounds(1, 3, 160, 80);
-        shot1.setBackground(Color.WHITE);
-        shot1.addActionListener(new ActionListener() {
+        // 가짜 버튼 추가
+        // JRadioButton notButton0 = new JRadioButton();
+        JRadioButton notButton1 = new JRadioButton();
+        JRadioButton notButton2 = new JRadioButton();
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                label[11].setText("샷 1회 추가");
-                label[12].setText(price += "500");
-
-            }
-        });
-        JRadioButton shot2 = new JRadioButton("샷 2회 추가");
-        shot2.setBounds(7, 7, 160, 80);
-        shot2.setBackground(Color.WHITE);
-        JRadioButton shot0 = new JRadioButton("샷 추가 없음");
-        shot0.setBounds(7, 10, 160, 80);
-        shot0.setBackground(Color.WHITE);
-
-        ButtonGroup shotButton = new ButtonGroup();
-        shotButton.add(shot1);
-        shotButton.add(shot2);
-        shotButton.add(shot0);
+        /*
+         * 옵션 줄이기
+         * // 샷 추가
+         * JRadioButton shot0 = new JRadioButton("샷 추가 없음");
+         * shot0.setBounds(60, 10, 100, 30);
+         * shot0.setBackground(Color.WHITE);
+         * shot0.setOpaque(false);
+         * shot0.addActionListener(new ActionListener() {
+         * 
+         * @Override
+         * public void actionPerformed(ActionEvent e) {
+         * coffee.setShot("샷 추가 없음");
+         * selectedOption0 = coffee.getShot();
+         * coffee.setName(selectedProduct =
+         * "<html>" + selectedProduct + "<br>" + selectedOption1 + "<br>" +
+         * selectedOption2 + "<br>" + selectedOption2 + "</html>");
+         * coffee.setPrice(sumPrice);
+         * selectedProduct = coffee.getName();
+         * sumPrice = coffee.getPrice();
+         * label[11].setText(selectedProduct);
+         * label[12].setText(String.valueOf(sumPrice) + "원");
+         * }
+         * });
+         * 
+         * 
+         * JRadioButton shot1 = new JRadioButton("샷 1회 추가");
+         * shot1.setBounds(60, 40, 100, 30);
+         * shot1.setBackground(Color.WHITE);
+         * shot1.setOpaque(false);
+         * shot1.addActionListener(new ActionListener() {
+         * 
+         * @Override
+         * public void actionPerformed(ActionEvent e) {
+         * coffee.setShot("샷 1회 추가");
+         * selectedOption0 = coffee.getShot();
+         * coffee.setName(selectedProduct =
+         * "<html>" + selectedProduct + "<br>" + selectedOption1 + "<br>" +
+         * selectedOption2 + "<br>" + selectedOption2 + "</html>");
+         * coffee.setPrice(sumPrice + 500);
+         * selectedProduct = coffee.getName();
+         * sumPrice = coffee.getPrice();
+         * label[11].setText(selectedProduct);
+         * label[12].setText(String.valueOf(sumPrice) + "원");
+         * }
+         * });
+         * 
+         * 
+         * JRadioButton shot2 = new JRadioButton("샷 2회 추가");
+         * shot2.setBounds(60, 70, 100, 30);
+         * shot2.setBackground(Color.WHITE);
+         * shot2.setOpaque(false);
+         * shot2.addActionListener(new ActionListener() {
+         * 
+         * @Override
+         * public void actionPerformed(ActionEvent e) {
+         * coffee.setShot("샷 2회 추가");
+         * selectedOption0 = coffee.getShot();
+         * coffee.setName(selectedProduct =
+         * "<html>" + selectedProduct + "<br>" + selectedOption1 + "<br>" +
+         * selectedOption2 + "<br>" + selectedOption2 + "</html>");
+         * coffee.setPrice(sumPrice + 1000);
+         * selectedProduct = coffee.getName();
+         * sumPrice = coffee.getPrice();
+         * label[11].setText(selectedProduct);
+         * label[12].setText(String.valueOf(sumPrice) + "원");
+         * }
+         * });
+         * 
+         * 
+         * 
+         * ButtonGroup shotButton = new ButtonGroup();
+         * shotButton.add(notButton0);
+         * shotButton.add(shot1);
+         * shotButton.add(shot2);
+         * shotButton.add(shot0);
+         */
 
         // 사이즈 선택
-        JRadioButton size1 = new JRadioButton("레귤러");
-        shot1.setBounds(7, 3, 160, 80);
-        shot1.setBackground(Color.WHITE);
-        JRadioButton size2 = new JRadioButton("라지");
-        shot2.setBounds(7, 3, 160, 80);
-        shot2.setBackground(Color.WHITE);
-        JRadioButton size0 = new JRadioButton("스몰");
-        shot0.setBounds(7, 3, 160, 80);
-        shot0.setBackground(Color.WHITE);
+        JRadioButton size0 = new JRadioButton("레귤러");
+        size0.setBounds(75, 50, 70, 30);
+        size0.setBackground(Color.WHITE);
+        size0.setOpaque(false);
+        size0.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                coffee.setSize("레귤러");
+                coffee.setPrice(sumPrice + 500);
+                selectedProduct = ("<html>" + coffee.getName() + "<br>" + coffee.getSize() + "<br>" + coffee.getTemp()
+                        + "</html>");
+                sumPrice = coffee.getPrice();
+                label[11].setText(selectedProduct);
+                label[12].setText(String.valueOf(sumPrice) + "원");
+            }
+        });
+
+        JRadioButton size1 = new JRadioButton("라지");
+        size1.setBounds(75, 90, 70, 30);
+        size1.setBackground(Color.WHITE);
+        size1.setOpaque(false);
+        size1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                coffee.setSize("라지");
+                coffee.setPrice(sumPrice + 1000);
+                selectedProduct = ("<html>" + coffee.getName() + "<br>" + coffee.getSize() + "<br>" + coffee.getTemp()
+                        + "</html>");
+                sumPrice = coffee.getPrice();
+                label[11].setText(selectedProduct);
+                label[12].setText(String.valueOf(sumPrice) + "원");
+            }
+        });
+
+        JRadioButton size2 = new JRadioButton("벤티");
+        size2.setBounds(75, 130, 70, 30);
+        size2.setBackground(Color.WHITE);
+        size2.setOpaque(false);
+        size2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                coffee.setSize("벤티");
+                coffee.setPrice(sumPrice + 1500);
+                selectedProduct = ("<html>" + coffee.getName() + "<br>" + coffee.getSize() + "<br>" + coffee.getTemp()
+                        + "</html>");
+                sumPrice = coffee.getPrice();
+                label[11].setText(selectedProduct);
+                label[12].setText(String.valueOf(sumPrice) + "원");
+            }
+        });
 
         ButtonGroup sizeButton = new ButtonGroup();
+        sizeButton.add(notButton1);
+        sizeButton.add(size0);
         sizeButton.add(size1);
         sizeButton.add(size2);
-        sizeButton.add(size0);
 
         // 온도 선택
         JRadioButton temp1 = new JRadioButton("따뜻하게");
+        temp1.setBounds(60, 50, 100, 30);
+        temp1.setBackground(Color.WHITE);
+        temp1.setOpaque(false);
+        temp1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                coffee.setTemp("따뜻하게");
+                coffee.setPrice(sumPrice);
+                selectedProduct = ("<html>" + coffee.getName() + "<br>" + coffee.getSize() + "<br>" + coffee.getTemp()
+                        + "</html>");
+                sumPrice = coffee.getPrice();
+                label[11].setText(selectedProduct);
+                label[12].setText(String.valueOf(sumPrice) + "원");
+            }
+        });
+
         JRadioButton temp2 = new JRadioButton("시원하게");
+        temp2.setBounds(60, 130, 100, 30);
+        temp2.setBackground(Color.WHITE);
+        temp2.setOpaque(false);
+        temp2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                coffee.setTemp("시원하게");
+                coffee.setPrice(sumPrice + 500);
+                selectedProduct = ("<html>" + coffee.getName() + "<br>" + coffee.getSize() + "<br>" + coffee.getTemp()
+                        + "</html>");
+                sumPrice = coffee.getPrice();
+                label[11].setText(selectedProduct);
+                label[12].setText(String.valueOf(sumPrice) + "원");
+            }
+        });
 
         ButtonGroup tempButton = new ButtonGroup();
+        tempButton.add(notButton2);
         tempButton.add(temp1);
         tempButton.add(temp2);
+
+        ///////////////////////////////////////////////////////////////////////////////////////
+        // 박스 레이아웃
+        Box leftBox = Box.createVerticalBox();
+        leftBox.add(Box.createVerticalStrut(30));
+        leftBox.add(size1);
+        leftBox.add(size2);
+        leftBox.add(size0);
+        label[14].add(leftBox, BorderLayout.CENTER);
+        label[14].setBorder(new TitledBorder(new EtchedBorder(), "사이즈"));
+
+        Box rightBox = Box.createVerticalBox();
+        rightBox.add(Box.createVerticalStrut(30));
+        rightBox.add(temp1);
+        rightBox.add(temp2);
+        label[17].add(leftBox, BorderLayout.CENTER);
+        label[17].setBorder(new TitledBorder(new EtchedBorder(), "얼음은 500원 추가에요!"));
 
         ///////////////////////////////////////////////////////////////////////////////////////
         // 사이드 라벨
@@ -406,9 +599,12 @@ public class MainUI extends JFrame {
         constraint[19].fill = GridBagConstraints.BOTH;
         panel.add(label[13], constraint[19]);
 
+        label[14].setHorizontalAlignment(JLabel.CENTER);
+        label[14].setText("");
         label[14].add(size1);
         label[14].add(size2);
         label[14].add(size0);
+
         constraint[20].gridx = 3;
         constraint[20].gridy = 2;
         constraint[20].weightx = 1;
@@ -432,9 +628,12 @@ public class MainUI extends JFrame {
         constraint[22].fill = GridBagConstraints.BOTH;
         panel.add(label[16], constraint[22]);
 
-        label[17].add(shot1);
-        label[17].add(shot2);
-        label[17].add(shot0);
+        label[17].setText("");
+        // label[17].add(shot1);
+        // label[17].add(shot2);
+        // label[17].add(shot0);
+        label[17].add(temp1);
+        label[17].add(temp2);
         constraint[23].gridx = 4;
         constraint[23].gridy = 2;
         constraint[23].weightx = 1;
@@ -474,6 +673,7 @@ public class MainUI extends JFrame {
         ///////////////////////////////////////////////////////////////////////////////////////
         // 결제 버튼
         button[9].setText("결제하기");
+
         constraint[27].gridx = 3;
         constraint[27].gridy = 5;
         constraint[27].weightx = 1;
@@ -484,9 +684,21 @@ public class MainUI extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "결제가 승인됐습니다." + "\\n" + "잠시만 기다려주세요.");
+                JOptionPane.showMessageDialog(null, "결제가 승인됐습니다. \n 잠시만 기다려주세요.");
                 label[11].setText("");
                 label[12].setText("");
+                // notButton0.setSelected(true);
+                notButton1.setSelected(true);
+                notButton2.setSelected(true);
+                selectedProduct = "";
+                selectedOption1 = "";
+                selectedOption2 = "";
+                coffee.setName("");
+                // coffee.setShot("");
+                coffee.setSize("");
+                coffee.setTemp("");
+                coffee.setPrice(0);
+                sumPrice = 0;
             }
         });
 
@@ -505,6 +717,18 @@ public class MainUI extends JFrame {
                 JOptionPane.showMessageDialog(null, "장바구니를 비웠습니다.");
                 label[11].setText("");
                 label[12].setText("");
+                // notButton0.setSelected(true);
+                notButton1.setSelected(true);
+                notButton2.setSelected(true);
+                selectedProduct = "";
+                selectedOption1 = "";
+                selectedOption2 = "";
+                coffee.setName("");
+                // coffee.setShot("");
+                coffee.setSize("");
+                coffee.setTemp("");
+                coffee.setPrice(0);
+                sumPrice = 0;
             }
         });
 
@@ -513,5 +737,4 @@ public class MainUI extends JFrame {
         this.setContentPane(panel);
         this.setVisible(true);
     }
-
 };

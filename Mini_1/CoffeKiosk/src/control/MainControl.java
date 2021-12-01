@@ -1,13 +1,10 @@
 package control;
 
 import java.awt.EventQueue;
-import java.io.File;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
-import Banner.Banner_1;
-import entitiy.MainUI;
+import Banner.BannerPage;
 
 public class MainControl extends JFrame {
 
@@ -22,6 +19,17 @@ public class MainControl extends JFrame {
         // e.printStackTrace();
         // }
 
-    }
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    new BannerPage();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
+            }
+
+        });
+
+    }
 }

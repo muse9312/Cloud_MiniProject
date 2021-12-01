@@ -1,10 +1,10 @@
 package entitiy;
 
 public class CoffeeInfo extends Object {
-    private String name;
-    private String size;
-    private String shot;
-    private String temp;
+    private String name = "";
+    private String size = "";
+    // private String shot = "";
+    private String temp = "";
     private int price;
 
     public String getName() {
@@ -23,13 +23,13 @@ public class CoffeeInfo extends Object {
         this.size = size;
     }
 
-    public String getShot() {
-        return this.shot;
-    }
+    // public String getShot() {
+    // return this.shot;
+    // }
 
-    public void setShot(String shot) {
-        this.shot = shot;
-    }
+    // public void setShot(String shot) {
+    // this.shot = shot;
+    // }
 
     public String getTemp() {
         return this.temp;
@@ -52,10 +52,9 @@ public class CoffeeInfo extends Object {
         return "{" +
                 " name='" + getName() + "'" +
                 ", size='" + getSize() + "'" +
-                ", shot='" + getShot() + "'" +
+                // ", shot='" + getShot() + "'" +
                 ", temp='" + getTemp() + "'" +
                 ", price='" + getPrice() + "'" +
                 "}";
     }
-
-}
+};
